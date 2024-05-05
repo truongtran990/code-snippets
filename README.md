@@ -9,7 +9,7 @@ To use the snippets in this repository, follow these steps:
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/code-snippets.git
+   git clone https://github.com/truongtran990/code-snippets.git
    ```
 
 2. Navigate to the desired programming language folder:
