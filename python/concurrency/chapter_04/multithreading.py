@@ -1,7 +1,8 @@
 import os
 import time
 import threading
-from threading import Thread 
+from threading import Thread
+
 
 def cpu_waster(i: int) -> None:
     name = threading.current_thread().getName
@@ -27,6 +28,7 @@ def main(num_threads: int) -> None:
         thread.start()
 
     display_threads()
+
 
 if __name__ == "__main__":
     num_threads = 5

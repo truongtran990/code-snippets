@@ -1,6 +1,7 @@
 import os
 from multiprocessing import Process
 
+
 def run_child() -> None:
     print("\n")
     print("*" * 10)
@@ -21,6 +22,7 @@ def start_parent(num_children: int) -> None:
 
         # forking a new process
         Process(target=run_child).start()
+
 
 def main():
     num_children = 3
