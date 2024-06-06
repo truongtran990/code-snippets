@@ -43,4 +43,12 @@ There are two types of pipe:
     + threads in the same process
 - named: disappear after the tasks finish using them
 
+#### Message queues
+Message queues provide a powerful means of decoupling tasks in a system allowing producers and consumers to interact with the queue
+instead of directly with each other.
+Workers can put messages back to the message queue if they have not been processed for some reason.
+
+#### Unix domain sockets (UDS sockets)
+
+### Thread pool pattern
 
