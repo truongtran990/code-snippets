@@ -1,13 +1,19 @@
+"""
+Implementing the game program using threads without multitaking using blocking threads
+"""
 import typing as T
-from threading import Thread, Event
+from threading import Thread, Timer, Event
+
 from pacman import get_user_input, compute_game_world, render_next_screen
 
 
 processor_free = Event()
+processor_free.set()
+TIME_SLICE = 0.5
 
 
 class Task(Thread):
-    def __init__(self, func: T.Callable[..., None]):
+    def __init__(self, func: T.Callable[..., None]) -> None:
         super().__init__()
         self.func = func
 
@@ -18,11 +24,22 @@ class Task(Thread):
             self.func()
 
 
+class InterruptService(Timer):
+    def __init__(self):
+        super().__init__(TIME_SLICE, lambda: None)
+
+    def run(self):
+        while not self.finished.wait(self.interval):
+            print("Tick!")
+            processor_free.set()
+
+
 def arcade_machine() -> None:
     get_user_input_task = Task(get_user_input)
     compute_game_world_task = Task(compute_game_world)
     render_next_screen_task = Task(render_next_screen)
 
+    InterruptService().start()
     get_user_input_task.start()
     compute_game_world_task.start()
     render_next_screen_task.start()
